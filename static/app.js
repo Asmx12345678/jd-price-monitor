@@ -1,10 +1,12 @@
-const state = { items: [], category: "全部", dealType: "全部", sort: "drop" };
+const state = { items: [], category: "全部", dealType: "全部", sort: "drop", query: "" };
 const grid = document.querySelector("#dealGrid");
 const template = document.querySelector("#dealTemplate");
 const notice = document.querySelector("#notice");
 const empty = document.querySelector("#emptyState");
 const scanButton = document.querySelector("#scanButton");
 const settingsForm = document.querySelector("#settingsForm");
+const searchInput = document.querySelector("#searchInput");
+const clearSearch = document.querySelector("#clearSearch");
 
 function money(value) { return Number(value).toFixed(2).replace(/\.00$/, ""); }
 function formatTime(value) {
@@ -80,9 +82,12 @@ function renderDealTypes() {
 }
 
 function renderDeals() {
+  const query = state.query.trim().toLocaleLowerCase("zh-CN");
   let items = state.items.filter(item =>
     (state.category === "全部" || item.category === state.category) &&
-    (state.dealType === "全部" || item.deal_kind === state.dealType)
+    (state.dealType === "全部" || item.deal_kind === state.dealType) &&
+    (!query || [item.name, item.sku_id, item.category, item.source, item.offer_text, item.reason]
+      .filter(Boolean).join(" ").toLocaleLowerCase("zh-CN").includes(query))
   );
   const sorters = {
     drop: (a, b) => b.drop_percent - a.drop_percent,
@@ -157,6 +162,10 @@ function renderDeals() {
     grid.appendChild(card);
   }
   empty.hidden = items.length > 0;
+  document.querySelector("#emptyTitle").textContent = query ? "没有找到匹配商品" : "还没有符合阈值的降价";
+  document.querySelector("#emptyCopy").textContent = query ? "换一个商品名称、SKU或更短的关键词试试。" : "后台仍会自动扫描；也可以降低上方的降价阈值。";
+  document.querySelector("#searchResultCount").textContent = query ? `找到 ${items.length} 件` : `显示 ${items.length} 件`;
+  clearSearch.hidden = !query;
   document.querySelector("#dealCount").textContent = state.items.length;
 }
 
@@ -229,6 +238,13 @@ settingsForm.onsubmit = async event => {
   }
 };
 document.querySelector("#sortSelect").onchange = event => { state.sort = event.target.value; renderDeals(); };
+searchInput.oninput = event => { state.query = event.target.value; renderDeals(); };
+clearSearch.onclick = () => {
+  searchInput.value = "";
+  state.query = "";
+  searchInput.focus();
+  renderDeals();
+};
 load();
 setInterval(load, 60 * 1000);
 

@@ -47,6 +47,15 @@
       </form>
     </section>
 
+    <section class="search-panel" aria-label="搜索商品">
+      <div class="search-field">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="搜索商品名称、SKU、分类或优惠，例如：可乐、1000123456" autocomplete="off">
+        <button id="clearSearch" type="button" hidden>清除</button>
+      </div>
+      <span id="searchResultCount" class="search-result-count">显示全部商品</span>
+    </section>
+
     <section class="controls" aria-label="筛选">
       <div class="filter-stack">
         <div id="dealTypes" class="categories" aria-label="降价类型"></div>
@@ -70,8 +79,8 @@
     <section id="dealGrid" class="deal-grid" aria-live="polite"></section>
     <section id="emptyState" class="empty-state" hidden>
       <div class="radar-icon"><span></span></div>
-      <h2>还没有符合阈值的降价</h2>
-      <p>后台仍会自动扫描；也可以降低上方的降价阈值。</p>
+      <h2 id="emptyTitle">还没有符合阈值的降价</h2>
+      <p id="emptyCopy">后台仍会自动扫描；也可以降低上方的降价阈值。</p>
     </section>
   </main>
 

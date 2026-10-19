@@ -64,6 +64,13 @@ h1 { font-family: ui-serif, Georgia, "Songti SC", serif; font-size: clamp(42px, 
 .input-wrap b { margin-left: auto; font-size: 12px; color: #b9b1a6; }
 .rule-form button { height: 42px; border: 0; border-radius: 10px; padding: 0 16px; background: var(--red); color: white; font-weight: 800; cursor: pointer; }
 .rule-form button:disabled { opacity: .65; cursor: wait; }
+.search-panel { display: flex; align-items: center; gap: 16px; margin: 0 0 18px; }
+.search-field { min-height: 50px; flex: 1; display: flex; align-items: center; gap: 10px; padding: 0 10px 0 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); box-shadow: 0 7px 24px rgba(59,39,20,.045); }
+.search-icon { color: var(--red); font-size: 25px; line-height: 1; transform: rotate(-18deg); }
+.search-field input { min-width: 0; flex: 1; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; }
+.search-field input::placeholder { color: #9a938a; }
+.search-field button { border: 0; border-radius: 9px; padding: 8px 11px; background: #eee7dc; color: var(--muted); cursor: pointer; }
+.search-result-count { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .controls { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
 .filter-stack { display: grid; gap: 10px; }
 .categories { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -117,5 +124,5 @@ h1 { font-family: ui-serif, Georgia, "Songti SC", serif; font-size: clamp(42px, 
 .radar-icon { width: 80px; height: 80px; border: 1px solid var(--line); border-radius: 50%; margin: 0 auto; display: grid; place-items: center; background: repeating-radial-gradient(circle, transparent 0 12px, rgba(216,48,34,.1) 13px 14px); }
 .radar-icon span { width: 9px; height: 9px; background: var(--red); border-radius: 50%; box-shadow: 0 0 0 8px rgba(216,48,34,.12); }
 @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 30px; } .rule-panel { align-items: flex-start; flex-direction: column; } .deal-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 620px) { .topbar { padding: 0 16px; } .mode-badge { display: none; } main { width: min(100% - 28px, 1180px); } .hero { padding-top: 46px; } .stats { grid-template-columns: 1fr 1fr 1fr; } .stats div { padding: 17px 8px; } .controls { align-items: flex-start; flex-direction: column; } .deal-grid { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .topbar { padding: 0 16px; } .mode-badge { display: none; } main { width: min(100% - 28px, 1180px); } .hero { padding-top: 46px; } .stats { grid-template-columns: 1fr 1fr 1fr; } .stats div { padding: 17px 8px; } .search-panel { align-items: stretch; flex-direction: column; gap: 8px; } .search-result-count { padding-left: 4px; } .controls { align-items: flex-start; flex-direction: column; } .deal-grid { grid-template-columns: 1fr; } }
 
