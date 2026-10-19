@@ -1,0 +1,2 @@
+"""JD supermarket deal monitor."""
+

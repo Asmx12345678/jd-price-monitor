@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>京东超市降价雷达</title>
+  <meta name="description" content="发现京东超市真实降价商品，展示单位价格和可复制商品链接。">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">价</span><span>京东超市降价雷达</span></a>
+    <div class="top-actions">
+      <span id="modeBadge" class="mode-badge">读取中</span>
+      <button id="scanButton" class="scan-button secondary">手动补扫</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">LOCAL DEAL WATCHER</p>
+        <h1>只看真正降价的商品</h1>
+        <p class="hero-copy">分别识别真实历史降价与京东公开优惠；同时比较总价和同规格单位价，发现后直接给出京东链接。</p>
+      </div>
+      <div class="stats" aria-label="监控状态">
+        <div><strong id="dealCount">—</strong><span>当前降价</span></div>
+        <div><strong id="trackedCount">—</strong><span>累计商品池</span></div>
+        <div><strong id="lastScan">—</strong><span>最近扫描</span></div>
+      </div>
+    </section>
+
+    <section class="rule-panel" aria-label="自动扫描规则">
+      <div>
+        <p class="rule-kicker">自动监控规则</p>
+        <h2>价格下降达到设定比例，自动展示</h2>
+        <p id="autoSummary">后台会持续扫描，无需手动点击。</p>
+      </div>
+      <form id="settingsForm" class="rule-form">
+        <label>降价达到
+          <span class="input-wrap"><input id="thresholdInput" type="number" min="0" max="100" step="1" required><b>%</b></span>
+        </label>
+        <label>每隔
+          <span class="input-wrap"><input id="intervalInput" type="number" min="1" max="1440" step="1" required><b>分钟</b></span>
+        </label>
+        <button id="saveSettings" type="submit">保存并立即生效</button>
+      </form>
+    </section>
+
+    <section class="controls" aria-label="筛选">
+      <div class="filter-stack">
+        <div id="dealTypes" class="categories" aria-label="降价类型"></div>
+        <div id="categories" class="categories" aria-label="商品分类"></div>
+      </div>
+      <label class="sort-control">排序
+        <select id="sortSelect">
+          <option value="drop">降幅最高</option>
+          <option value="price">到手价最低</option>
+          <option value="unit">单位价最低</option>
+        </select>
+      </label>
+    </section>
+
+    <section id="notice" class="notice" hidden></section>
+    <details class="capability-panel">
+      <summary>数据源与优惠覆盖状态</summary>
+      <div id="capabilityGrid" class="capability-grid"></div>
+      <p class="capability-note">PLUS、店铺会员、账号定向券、京豆、红包、白条及银行卡优惠没有公开的联盟发现接口，需登录结算页确认，系统不会把它们误报为公开最终价。</p>
+    </details>
+    <section id="dealGrid" class="deal-grid" aria-live="polite"></section>
+    <section id="emptyState" class="empty-state" hidden>
+      <div class="radar-icon"><span></span></div>
+      <h2>还没有符合阈值的降价</h2>
+      <p>后台仍会自动扫描；也可以降低上方的降价阈值。</p>
+    </section>
+  </main>
+
+  <template id="dealTemplate">
+    <article class="deal-card">
+      <div class="card-visual">
+        <img class="product-image" alt="" hidden>
+        <div class="image-placeholder">JD</div>
+        <span class="drop-badge"></span>
+        <span class="deal-kind-badge"></span>
+      </div>
+      <div class="card-body">
+        <div class="meta-row"><span class="category"></span><span class="source"></span></div>
+        <div class="trust-row"><span class="confidence"></span><span class="verified-at"></span></div>
+        <h2 class="product-name"></h2>
+        <p class="offer-text"></p>
+        <div class="price-row">
+          <div><small class="price-kind"></small><div><span class="currency">¥</span><strong class="current-price"></strong></div></div>
+          <div class="reference-wrap">参考价 <del class="reference-price"></del></div>
+        </div>
+        <div class="unit-row"><span class="pack-label"></span><strong class="unit-price"></strong></div>
+        <div class="card-actions">
+          <a class="view-link" target="_blank" rel="noopener">查看商品</a>
+          <a class="coupon-link" target="_blank" rel="noopener" hidden>先领优惠券</a>
+          <button class="copy-button">复制链接</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
+
