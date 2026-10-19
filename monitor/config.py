@@ -42,7 +42,7 @@ class Settings:
             site_id=os.getenv("JD_SITE_ID", "").strip(),
             position_id=os.getenv("JD_POSITION_ID", "").strip(),
             mode=mode,
-            scan_interval_minutes=max(5, int(os.getenv("JD_SCAN_INTERVAL_MINUTES", "30"))),
+            scan_interval_minutes=max(1, int(os.getenv("JD_SCAN_INTERVAL_MINUTES", "30"))),
             discovery_pages=max(5, min(50, int(os.getenv("JD_DISCOVERY_PAGES", "20")))),
             drop_threshold_percent=max(0, float(os.getenv("JD_DROP_THRESHOLD_PERCENT", "15"))),
             host=os.getenv("JD_HOST", "127.0.0.1"),

@@ -174,6 +174,7 @@ async function load() {
     if (status.public_read_only) {
       document.querySelector("#scanButton").hidden = true;
       document.querySelector("#settingsForm").hidden = true;
+      document.querySelector(".rule-kicker").textContent = "云端自动监控规则";
     }
     document.querySelector("#autoSummary").textContent = `后台每 ${status.interval_minutes} 分钟扫描 13 个京粉频道＋${status.material_channel_count} 个素材频道；本轮第 ${status.last_scan_page}/${status.page_cycle} 页共 ${status.last_scan_count} 件、新增 ${status.last_new_count} 件。真实历史价、同规格单位价或当前公开优惠达到 ${money(status.threshold_percent)}% 时分类展示。`;
     const warning = status.last_error || status.source_warnings || status.activity_error;

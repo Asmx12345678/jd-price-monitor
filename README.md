@@ -14,6 +14,7 @@
 
 - `JD_DATABASE_PATH=/data/prices.db`
 - `JD_HOST=0.0.0.0`
+- `JD_SCAN_INTERVAL_MINUTES=1`（最低支持 1 分钟）
 - `JD_PUBLIC_READ_ONLY=true`
 - `JD_MODE=live`
 - 京东联盟的 `JD_APP_KEY`、`JD_APP_SECRET`、`JD_SITE_ID`、`JD_POSITION_ID`
